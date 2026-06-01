@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell($env:PATH = $env:PATH + \";C:\\\\Users\\\\ta2yu\\\\AppData\\\\Roaming\\\\npm\"; yarn --version 2>&1)"
+    ]
+  }
+}
