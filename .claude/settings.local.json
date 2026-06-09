@@ -2,7 +2,8 @@
   "permissions": {
     "allow": [
       "PowerShell($env:PATH = $env:PATH + \";C:\\\\Users\\\\ta2yu\\\\AppData\\\\Roaming\\\\npm\"; yarn --version 2>&1)",
-      "PowerShell(New-Item -ItemType Directory -Force \"C:\\\\Users\\\\ta2yu\\\\yoru\\\\.github\\\\workflows\")"
+      "PowerShell(New-Item -ItemType Directory -Force \"C:\\\\Users\\\\ta2yu\\\\yoru\\\\.github\\\\workflows\")",
+      "WebFetch(domain:ta2-svg.github.io)"
     ]
   }
 }
