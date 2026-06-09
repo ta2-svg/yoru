@@ -6,7 +6,9 @@
       "WebFetch(domain:ta2-svg.github.io)",
       "Bash(gh api *)",
       "Bash(python3 -c \"import sys,json; data=json.load\\(sys.stdin\\); [print\\(f['path']\\) for f in data.get\\('tree',[]\\) if not f['path'].startswith\\('.'\\)]\")",
-      "Bash(python3 -c \"import sys,json,base64; d=json.load\\(sys.stdin\\); print\\(base64.b64decode\\(d['content']\\).decode\\(\\)\\)\")"
+      "Bash(python3 -c \"import sys,json,base64; d=json.load\\(sys.stdin\\); print\\(base64.b64decode\\(d['content']\\).decode\\(\\)\\)\")",
+      "PowerShell(gh api repos/ta2-svg/yoru/contents/index.html?ref=gh-pages | ConvertFrom-Json | Select-Object -ExpandProperty content | ForEach-Object { [System.Text.Encoding]::UTF8.GetString\\([System.Convert]::FromBase64String\\($_ -replace \"`n\",\"\"\\)\\) })",
+      "PowerShell($content = gh api repos/ta2-svg/yoru/contents/index.html?ref=gh-pages | ConvertFrom-Json | Select-Object -ExpandProperty content; [System.Text.Encoding]::UTF8.GetString\\([System.Convert]::FromBase64String\\($content.Replace\\(\"`n\",\"\"\\)\\)\\))"
     ]
   }
 }

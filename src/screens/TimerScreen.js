@@ -3,19 +3,29 @@ import {
   View, Text, TouchableOpacity, StyleSheet, ScrollView, Alert, Platform
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import * as Notifications from 'expo-notifications';
-import { activateKeepAwakeAsync, deactivateKeepAwake } from 'expo-keep-awake';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useTheme } from '../context/ThemeContext';
 import AntiSnoozeChallenge from '../components/AntiSnoozeChallenge';
 
-Notifications.setNotificationHandler({
-  handleNotification: async () => ({
-    shouldShowAlert: true,
-    shouldPlaySound: true,
-    shouldSetBadge: false,
-  }),
-});
+// モバイルのみ通知・KeepAwakeを使用
+let Notifications = null;
+let activateKeepAwakeAsync = () => Promise.resolve();
+let deactivateKeepAwake = () => {};
+
+if (Platform.OS !== 'web') {
+  Notifications = require('expo-notifications');
+  const keepAwake = require('expo-keep-awake');
+  activateKeepAwakeAsync = keepAwake.activateKeepAwakeAsync;
+  deactivateKeepAwake = keepAwake.deactivateKeepAwake;
+
+  Notifications.setNotificationHandler({
+    handleNotification: async () => ({
+      shouldShowAlert: true,
+      shouldPlaySound: true,
+      shouldSetBadge: false,
+    }),
+  });
+}
 
 function pad(n) { return String(n).padStart(2, '0'); }
 function formatDuration(seconds) {
@@ -50,7 +60,7 @@ export default function TimerScreen() {
   }, []);
 
   const requestPermissions = async () => {
-    await Notifications.requestPermissionsAsync();
+    if (Notifications) await Notifications.requestPermissionsAsync();
   };
 
   const loadHistory = async () => {
@@ -75,22 +85,24 @@ export default function TimerScreen() {
       setElapsed((prev) => prev + 1);
     }, 1000);
 
-    const trigger = new Date(now + alarmHours * 3600 * 1000);
-    const id = await Notifications.scheduleNotificationAsync({
-      content: {
-        title: '⏰ 起きる時間です',
-        body: `${alarmHours}時間が経過しました！`,
-        sound: true,
-      },
-      trigger,
-    });
-    notifIdRef.current = id;
+    if (Notifications) {
+      const trigger = new Date(now + alarmHours * 3600 * 1000);
+      const id = await Notifications.scheduleNotificationAsync({
+        content: {
+          title: '⏰ 起きる時間です',
+          body: `${alarmHours}時間が経過しました！`,
+          sound: true,
+        },
+        trigger,
+      });
+      notifIdRef.current = id;
+    }
   };
 
   const stop = async (solved = false) => {
     clearInterval(intervalRef.current);
     setRunning(false);
-    if (notifIdRef.current) {
+    if (notifIdRef.current && Notifications) {
       await Notifications.cancelScheduledNotificationAsync(notifIdRef.current);
       notifIdRef.current = null;
     }

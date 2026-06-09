@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
 import {
-  View, Text, TouchableOpacity, StyleSheet, ScrollView, Alert, FlatList
+  View, Text, TouchableOpacity, StyleSheet, ScrollView, Alert, Platform
 } from 'react-native';
 import { Audio } from 'expo-av';
 import { Ionicons } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useTheme } from '../context/ThemeContext';
+
+const isWeb = Platform.OS === 'web';
 
 function pad(n) { return String(n).padStart(2, '0'); }
 function formatDuration(ms) {
@@ -25,7 +27,7 @@ export default function RecordScreen() {
 
   useEffect(() => {
     loadRecordings();
-    Audio.requestPermissionsAsync();
+    if (!isWeb) Audio.requestPermissionsAsync();
     return () => {
       clearInterval(timerRef.current);
       soundRef.current?.unloadAsync();
@@ -42,6 +44,10 @@ export default function RecordScreen() {
   };
 
   const startRecording = async () => {
+    if (isWeb) {
+      Alert.alert('お知らせ', '録音機能はモバイルアプリのみ対応しています');
+      return;
+    }
     try {
       await Audio.setAudioModeAsync({
         allowsRecordingIOS: true,
