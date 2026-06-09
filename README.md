@@ -1,98 +1,108 @@
-# 夜 (Yoru) - 睡眠記録アプリ
+# 🌙 夜 (Yoru) — 睡眠記録アプリ
 
 <div align="center">
-  <h3>🌙 あなたの眠りをサポートする睡眠アプリ</h3>
-  <p>React Native (Expo) で作られたモバイル向け睡眠管理アプリ</p>
+
+**React Native (Expo) で作った睡眠管理モバイルアプリです。**
+
+[![GitHub Pages](https://img.shields.io/badge/デモを見る-GitHub%20Pages-blue?style=for-the-badge&logo=github)](https://ta2-svg.github.io/yoru)
+
 </div>
 
 ---
 
-## 機能
+## 📱 アプリの機能
 
-### ⏰ 睡眠タイマー
-- 睡眠時間を自動計測
-- アラーム設定（6〜8時間後）
-- 睡眠記録の履歴表示（直近10件）
-
-### 🧩 二度寝防止
-- アラームを止めるには計算問題を解く必要がある
-- 間違えるたびに新しい問題が出題される
-- 加算・減算・乗算のランダム問題
-
-### 🎙️ 睡眠録音
-- 睡眠中の音声を録音・保存
-- 録音一覧から再生・削除
-- いびきや寝言の確認に
-
-### 🌬️ 睡眠導入
-- **呼吸法**: 4-7-8・ボックス・ゆっくり呼吸
-- **環境音**: 雨音・波音・ホワイトノイズ・森の音
-- アニメーションで呼吸をガイド
-
-### 🎨 テーマ着せ替え
-- 5種類のテーマ: 夜空・オーロラ・桜・深林・深海
-- 設定は端末に保存される
+| 機能 | 説明 |
+|------|------|
+| ⏰ **睡眠タイマー** | 睡眠時間を自動計測。6〜8時間後にアラームを設定できる |
+| 🧩 **二度寝防止** | アラームを止めるには計算問題を解く必要がある |
+| 🎙️ **睡眠録音** | 睡眠中の音を録音・再生・削除できる |
+| 🌬️ **睡眠導入** | 呼吸法アニメーション（4-7-8呼吸など）と環境音 |
+| 🎨 **テーマ着せ替え** | 5種類のカラーテーマを選べる |
 
 ---
 
-## セットアップ
+## 🖼️ 画面構成
 
-```bash
-# リポジトリをクローン
-git clone https://github.com/YOUR_USERNAME/yoru.git
-cd yoru
-
-# 依存関係のインストール
-yarn install
-
-# Expo Go アプリで起動
-npx expo start
+```
+ホーム画面
+├── タイマー画面      ← 睡眠計測・アラーム・履歴
+├── 録音画面          ← 録音・再生・削除
+├── 睡眠導入画面      ← 呼吸法・環境音
+└── 設定画面          ← テーマ選択
 ```
 
-### 必要な環境
-- Node.js 18+
-- Expo Go アプリ (iOS/Android)
-- または Android Studio / Xcode
+---
+
+## 🎨 テーマ一覧
+
+| テーマ名 | イメージ |
+|---------|--------|
+| 夜空 (Midnight) | 深い紺色 × 青紫 |
+| オーロラ (Aurora) | 深緑 × シアン |
+| 桜 (Sakura) | 深紅 × ピンク |
+| 深林 (Forest) | 深緑 × ライトグリーン |
+| 深海 (Ocean) | 黒 × 水色 |
 
 ---
 
-## 技術スタック
+## 🛠️ 技術スタック
 
 | 項目 | 技術 |
 |------|------|
-| フレームワーク | React Native (Expo) |
-| ナビゲーション | React Navigation v6 |
+| フレームワーク | React Native (Expo SDK 56) |
+| 言語 | JavaScript |
+| ナビゲーション | React Navigation v6 (Bottom Tabs) |
 | 音声 | expo-av |
 | 通知 | expo-notifications |
 | ストレージ | AsyncStorage |
-| アイコン | @expo/vector-icons (Ionicons) |
+| アイコン | Ionicons (@expo/vector-icons) |
 
 ---
 
-## ディレクトリ構成
+## 📁 ファイル構成
 
 ```
 yoru/
-├── App.js                        # エントリーポイント
+├── App.js                              # エントリーポイント
+├── app.json                            # Expo設定
 └── src/
     ├── context/
-    │   └── ThemeContext.js       # テーマ管理
+    │   └── ThemeContext.js             # テーマのグローバル管理
     ├── themes/
-    │   └── themes.js             # テーマ定義
+    │   └── themes.js                   # 5種類のテーマ定義
     ├── navigation/
-    │   └── AppNavigator.js       # タブナビゲーション
+    │   └── AppNavigator.js             # タブナビゲーション
     ├── screens/
-    │   ├── HomeScreen.js         # ホーム画面
-    │   ├── TimerScreen.js        # タイマー画面
-    │   ├── RecordScreen.js       # 録音画面
-    │   ├── SleepAidScreen.js     # 睡眠導入画面
-    │   └── SettingsScreen.js     # テーマ設定画面
+    │   ├── HomeScreen.js               # ホーム画面
+    │   ├── TimerScreen.js              # 睡眠タイマー画面
+    │   ├── RecordScreen.js             # 録音画面
+    │   ├── SleepAidScreen.js           # 睡眠導入画面
+    │   └── SettingsScreen.js           # テーマ設定画面
     └── components/
-        └── AntiSnoozeChallenge.js # 二度寝防止コンポーネント
+        └── AntiSnoozeChallenge.js      # 二度寝防止コンポーネント
 ```
 
 ---
 
-## ライセンス
+## 🚀 ローカルで動かす方法
 
-MIT License
+```bash
+# リポジトリをクローン
+git clone https://github.com/ta2-svg/yoru.git
+cd yoru
+
+# 依存関係インストール
+yarn install
+
+# 起動
+npx expo start
+```
+
+スマホに **Expo Go** アプリを入れてQRコードを読み取ると動作確認できます。
+
+---
+
+## 👤 作成者
+
+- GitHub: [@ta2-svg](https://github.com/ta2-svg)
