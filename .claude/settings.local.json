@@ -3,7 +3,10 @@
     "allow": [
       "PowerShell($env:PATH = $env:PATH + \";C:\\\\Users\\\\ta2yu\\\\AppData\\\\Roaming\\\\npm\"; yarn --version 2>&1)",
       "PowerShell(New-Item -ItemType Directory -Force \"C:\\\\Users\\\\ta2yu\\\\yoru\\\\.github\\\\workflows\")",
-      "WebFetch(domain:ta2-svg.github.io)"
+      "WebFetch(domain:ta2-svg.github.io)",
+      "Bash(gh api *)",
+      "Bash(python3 -c \"import sys,json; data=json.load\\(sys.stdin\\); [print\\(f['path']\\) for f in data.get\\('tree',[]\\) if not f['path'].startswith\\('.'\\)]\")",
+      "Bash(python3 -c \"import sys,json,base64; d=json.load\\(sys.stdin\\); print\\(base64.b64decode\\(d['content']\\).decode\\(\\)\\)\")"
     ]
   }
 }
