@@ -20,9 +20,6 @@ jobs:
       - name: Install dependencies
         run: yarn install --ignore-engines
 
-      - name: Install web dependencies
-        run: yarn add --ignore-engines react-dom react-native-web @expo/metro-runtime
-
       - name: Build web
         run: npx expo export --platform web
 
