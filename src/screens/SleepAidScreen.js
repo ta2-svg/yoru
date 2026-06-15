@@ -3,14 +3,13 @@ import {
   View, Text, TouchableOpacity, StyleSheet, ScrollView, Animated, Easing
 } from 'react-native';
 import { Audio } from 'expo-av';
-import { Ionicons } from '@expo/vector-icons';
 import { useTheme } from '../context/ThemeContext';
 
 const SOUNDS = [
-  { id: 'rain', label: '雨音', icon: 'rainy-outline', desc: '穏やかな雨の音' },
-  { id: 'ocean', label: '波音', icon: 'water-outline', desc: '寄せては返す波' },
-  { id: 'white', label: 'ホワイトノイズ', icon: 'radio-outline', desc: '一定の静音' },
-  { id: 'forest', label: '森の音', icon: 'leaf-outline', desc: '虫の声・風の音' },
+  { id: 'rain', label: '雨音', emoji: '🌧️', desc: '穏やかな雨の音' },
+  { id: 'ocean', label: '波音', emoji: '🌊', desc: '寄せては返す波' },
+  { id: 'white', label: 'ホワイトノイズ', emoji: '📻', desc: '一定の静音' },
+  { id: 'forest', label: '森の音', emoji: '🌿', desc: '虫の声・風の音' },
 ];
 
 const BREATHING = [
@@ -133,7 +132,7 @@ export default function SleepAidScreen() {
                     {b.inhale}秒吸う {b.hold > 0 ? `→ ${b.hold}秒止める ` : ''}→ {b.exhale}秒吐く
                   </Text>
                 </View>
-                <Ionicons name="chevron-forward" size={20} color={theme.primary} />
+                <Text style={{ fontSize: 18, color: theme.primary }}>›</Text>
               </TouchableOpacity>
             ))}
           </View>
@@ -147,11 +146,7 @@ export default function SleepAidScreen() {
                   style={[s.soundCard, activeSound === sound.id && s.soundCardActive]}
                   onPress={() => toggleSound(sound.id)}
                 >
-                  <Ionicons
-                    name={sound.icon}
-                    size={28}
-                    color={activeSound === sound.id ? '#fff' : theme.primary}
-                  />
+                  <Text style={{ fontSize: 28 }}>{sound.emoji}</Text>
                   <Text style={[s.soundLabel, activeSound === sound.id && s.soundLabelActive]}>
                     {sound.label}
                   </Text>

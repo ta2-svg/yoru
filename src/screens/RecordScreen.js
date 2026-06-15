@@ -3,7 +3,6 @@ import {
   View, Text, TouchableOpacity, StyleSheet, ScrollView, Alert, Platform
 } from 'react-native';
 import { Audio } from 'expo-av';
-import { Ionicons } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useTheme } from '../context/ThemeContext';
 
@@ -122,8 +121,7 @@ export default function RecordScreen() {
         style={[s.mainButton, isRecording ? s.stopBtn : s.startBtn]}
         onPress={isRecording ? stopRecording : startRecording}
       >
-        <Ionicons name={isRecording ? 'stop' : 'mic'} size={24} color="#fff" />
-        <Text style={s.mainButtonText}>{isRecording ? '録音停止' : '録音開始'}</Text>
+        <Text style={s.mainButtonText}>{isRecording ? '⏹ 録音停止' : '🎙 録音開始'}</Text>
       </TouchableOpacity>
 
       {recordings.length > 0 && (
@@ -137,14 +135,10 @@ export default function RecordScreen() {
               </View>
               <View style={s.itemActions}>
                 <TouchableOpacity onPress={() => playRecording(r.uri)} style={s.actionBtn}>
-                  <Ionicons
-                    name={playingUri === r.uri ? 'pause-circle' : 'play-circle'}
-                    size={28}
-                    color={theme.primary}
-                  />
+                  <Text style={{ fontSize: 26 }}>{playingUri === r.uri ? '⏸' : '▶️'}</Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => deleteRecording(i)} style={s.actionBtn}>
-                  <Ionicons name="trash-outline" size={22} color={theme.danger} />
+                  <Text style={{ fontSize: 22 }}>🗑️</Text>
                 </TouchableOpacity>
               </View>
             </View>

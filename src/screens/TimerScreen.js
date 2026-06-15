@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import {
   View, Text, TouchableOpacity, StyleSheet, ScrollView, Alert, Platform
 } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useTheme } from '../context/ThemeContext';
 import AntiSnoozeChallenge from '../components/AntiSnoozeChallenge';
@@ -165,13 +164,8 @@ export default function TimerScreen() {
         style={[s.mainButton, running ? s.stopButton : s.startButton]}
         onPress={running ? handleStop : start}
       >
-        <Ionicons
-          name={running ? 'stop-circle-outline' : 'play-circle-outline'}
-          size={28}
-          color="#fff"
-        />
         <Text style={s.mainButtonText}>
-          {running ? '停止（二度寝防止）' : '睡眠開始'}
+          {running ? '⏹ 停止（二度寝防止）' : '▶ 睡眠開始'}
         </Text>
       </TouchableOpacity>
 

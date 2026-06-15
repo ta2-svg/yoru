@@ -1,13 +1,12 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
 import { useTheme } from '../context/ThemeContext';
 
 const features = [
-  { icon: 'alarm-outline', label: 'タイマー', screen: 'Timer', desc: '睡眠時間を計測・アラーム' },
-  { icon: 'mic-outline', label: '録音', screen: 'Record', desc: '睡眠中の音を記録' },
-  { icon: 'moon-outline', label: '睡眠導入', screen: 'SleepAid', desc: 'ホワイトノイズ・呼吸法' },
-  { icon: 'color-palette-outline', label: 'テーマ', screen: 'Settings', desc: '着せ替えカスタマイズ' },
+  { emoji: '⏰', label: 'タイマー', screen: 'Timer', desc: '睡眠時間を計測・アラーム' },
+  { emoji: '🎙️', label: '録音', screen: 'Record', desc: '睡眠中の音を記録' },
+  { emoji: '🌙', label: '睡眠導入', screen: 'SleepAid', desc: 'ホワイトノイズ・呼吸法' },
+  { emoji: '🎨', label: 'テーマ', screen: 'Settings', desc: '着せ替えカスタマイズ' },
 ];
 
 export default function HomeScreen({ navigation }) {
@@ -30,7 +29,7 @@ export default function HomeScreen({ navigation }) {
         {features.map((f) => (
           <TouchableOpacity key={f.screen} style={s.card} onPress={() => navigation.navigate(f.screen)}>
             <View style={s.iconWrap}>
-              <Ionicons name={f.icon} size={32} color={theme.primary} />
+              <Text style={s.emoji}>{f.emoji}</Text>
             </View>
             <Text style={s.cardLabel}>{f.label}</Text>
             <Text style={s.cardDesc}>{f.desc}</Text>
@@ -39,8 +38,7 @@ export default function HomeScreen({ navigation }) {
       </View>
 
       <View style={s.tip}>
-        <Ionicons name="information-circle-outline" size={16} color={theme.textSecondary} />
-        <Text style={s.tipText}>画面下のタブからも各機能にアクセスできます</Text>
+        <Text style={s.tipText}>ℹ️ 画面下のタブからも各機能にアクセスできます</Text>
       </View>
     </ScrollView>
   );
@@ -69,6 +67,7 @@ const styles = (theme) => StyleSheet.create({
     padding: 14,
     marginBottom: 12,
   },
+  emoji: { fontSize: 32 },
   cardLabel: { fontSize: 16, fontWeight: 'bold', color: theme.text, marginBottom: 4 },
   cardDesc: { fontSize: 11, color: theme.textSecondary, textAlign: 'center' },
   tip: {

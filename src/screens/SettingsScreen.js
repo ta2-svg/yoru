@@ -1,6 +1,5 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
 import { useTheme } from '../context/ThemeContext';
 
 export default function SettingsScreen() {
@@ -27,7 +26,7 @@ export default function SettingsScreen() {
             <Text style={s.themeName}>{t.name}</Text>
             {themeKey === key && (
               <View style={s.checkWrap}>
-                <Ionicons name="checkmark-circle" size={18} color={theme.primary} />
+                <Text style={{ fontSize: 18, color: theme.primary }}>✅</Text>
               </View>
             )}
           </TouchableOpacity>
@@ -38,19 +37,19 @@ export default function SettingsScreen() {
         <Text style={s.sectionTitle}>アプリについて</Text>
         <View style={s.infoCard}>
           <View style={s.infoRow}>
-            <Ionicons name="moon-outline" size={18} color={theme.primary} />
+            <Text style={s.infoEmoji}>🌙</Text>
             <Text style={s.infoLabel}>アプリ名</Text>
             <Text style={s.infoValue}>夜 (Yoru)</Text>
           </View>
           <View style={s.divider} />
           <View style={s.infoRow}>
-            <Ionicons name="code-slash-outline" size={18} color={theme.primary} />
+            <Text style={s.infoEmoji}>💻</Text>
             <Text style={s.infoLabel}>バージョン</Text>
             <Text style={s.infoValue}>1.0.0</Text>
           </View>
           <View style={s.divider} />
           <View style={s.infoRow}>
-            <Ionicons name="heart-outline" size={18} color={theme.primary} />
+            <Text style={s.infoEmoji}>❤️</Text>
             <Text style={s.infoLabel}>作成</Text>
             <Text style={s.infoValue}>React Native + Expo</Text>
           </View>
@@ -107,6 +106,7 @@ const styles = (theme) => StyleSheet.create({
     gap: 12,
     padding: 16,
   },
+  infoEmoji: { fontSize: 18 },
   infoLabel: { flex: 1, color: theme.textSecondary, fontSize: 14 },
   infoValue: { color: theme.text, fontSize: 14, fontWeight: '600' },
   divider: { height: 1, backgroundColor: theme.border },
